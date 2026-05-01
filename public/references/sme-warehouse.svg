@@ -1,0 +1,15 @@
+<svg width="900" height="675" viewBox="0 0 900 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="675" fill="#FFF7CC"/>
+  <rect x="70" y="92" width="760" height="492" rx="24" fill="#FFFFFF" stroke="#151515" stroke-width="4"/>
+  <rect x="112" y="148" width="170" height="110" rx="12" fill="#F6C400" stroke="#151515" stroke-width="4"/>
+  <rect x="112" y="286" width="170" height="110" rx="12" fill="#F6C400" stroke="#151515" stroke-width="4"/>
+  <rect x="112" y="424" width="170" height="110" rx="12" fill="#F6C400" stroke="#151515" stroke-width="4"/>
+  <rect x="332" y="148" width="170" height="110" rx="12" fill="#EAF4FF" stroke="#151515" stroke-width="4"/>
+  <rect x="332" y="286" width="170" height="110" rx="12" fill="#EAF4FF" stroke="#151515" stroke-width="4"/>
+  <rect x="332" y="424" width="170" height="110" rx="12" fill="#EAF4FF" stroke="#151515" stroke-width="4"/>
+  <rect x="552" y="180" width="210" height="320" rx="28" fill="#151515"/>
+  <rect x="588" y="232" width="138" height="72" rx="10" fill="white"/>
+  <path d="M606 252H708M606 270H708M606 288H708" stroke="#151515" stroke-width="8"/>
+  <rect x="604" y="370" width="106" height="28" rx="14" fill="#F6C400"/>
+  <text x="112" y="628" font-family="Tahoma, Arial, sans-serif" font-size="34" font-weight="900" fill="#151515">SME Warehouse Audit</text>
+</svg>

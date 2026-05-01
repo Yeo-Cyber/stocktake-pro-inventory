@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "StockTake Pro",
-  url: "https://inventory-audit-website.vercel.app",
+  url: "https://stocktake-pro-inventory.vercel.app",
   description:
     "StockTake Pro ให้บริการตรวจนับสต๊อกสินค้า จำหน่ายซอฟต์แวร์ตรวจนับผ่าน Excel และอุปกรณ์สแกนบาร์โค้ดสำหรับ SME โรงงาน คลังสินค้า และ Hypermarket",
 };
@@ -10,6 +10,7 @@ export const navItems = [
   { label: "เกี่ยวกับเรา", href: "/about" },
   { label: "บริการ", href: "/services" },
   { label: "โซลูชัน", href: "/projects" },
+  { label: "Reference", href: "/reference" },
   { label: "ติดต่อเรา", href: "/contact" },
 ];
 
@@ -82,5 +83,38 @@ export const productKits = [
     name: "Managed Audit",
     price: "มีทีมคุมงาน",
     detail: "ส่ง supervisor พร้อมอุปกรณ์และ workflow สำหรับงานตรวจนับจริง",
+  },
+];
+
+export const referenceCases = [
+  {
+    clientType: "คลังสินค้า SME",
+    title: "ตรวจนับคลังสินค้าออนไลน์ 3,200 SKU",
+    location: "กรุงเทพฯ",
+    period: "Q1/2026",
+    image: "/references/sme-warehouse.svg",
+    summary:
+      "นำไฟล์ Excel ตั้งต้นของลูกค้าเข้า workflow ตรวจนับด้วย barcode และสรุปรายการขาด/เกินสำหรับปรับยอดหลังบ้าน",
+    results: ["นับจบใน 1 วัน", "ระบุตำแหน่งสินค้าได้ทุกโซน", "ส่งรายงาน Excel พร้อม variance"],
+  },
+  {
+    clientType: "โรงงานผลิต",
+    title: "ตรวจนับวัตถุดิบเพื่อปิดงบประจำปี",
+    location: "ชลบุรี",
+    period: "Year-end Audit",
+    image: "/references/factory-audit.svg",
+    summary:
+      "จัดทีมตรวจนับร่วมกับฝ่ายคลังและฝ่ายบัญชี แยกรายงานตาม location, barcode และยอดผลต่างเพื่อใช้ตรวจสอบภายใน",
+    results: ["รองรับหลาย location", "มี audit trail รายการนับ", "พร้อมแนบหลักฐานภาพหน้างาน"],
+  },
+  {
+    clientType: "ร้านอาหารหลายสาขา",
+    title: "ตรวจนับวัตถุดิบและสินค้าสิ้นเปลือง",
+    location: "นนทบุรี",
+    period: "Monthly Check",
+    image: "/references/restaurant-stock.svg",
+    summary:
+      "ตรวจนับวัตถุดิบรอบสั้นเพื่อหาของหาย ของหมดอายุ และต้นทุนจม พร้อมรายงานสรุปให้เจ้าของกิจการดูง่าย",
+    results: ["เห็นของขาด/เกินรายสาขา", "ลดเวลารวมยอดด้วย Excel report", "เหมาะกับการตรวจซ้ำทุกเดือน"],
   },
 ];

@@ -1,0 +1,13 @@
+<svg width="900" height="675" viewBox="0 0 900 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="675" fill="#EAF4FF"/>
+  <rect x="92" y="176" width="716" height="326" rx="18" fill="#FFFFFF" stroke="#151515" stroke-width="4"/>
+  <path d="M124 176L206 106L288 176H124Z" fill="#F6C400" stroke="#151515" stroke-width="4"/>
+  <path d="M288 176L370 106L452 176H288Z" fill="#F6C400" stroke="#151515" stroke-width="4"/>
+  <path d="M452 176L534 106L616 176H452Z" fill="#F6C400" stroke="#151515" stroke-width="4"/>
+  <rect x="142" y="236" width="142" height="210" rx="10" fill="#151515"/>
+  <rect x="326" y="236" width="142" height="210" rx="10" fill="#151515"/>
+  <rect x="510" y="236" width="142" height="210" rx="10" fill="#151515"/>
+  <rect x="684" y="258" width="72" height="188" rx="8" fill="#0A6FBD"/>
+  <rect x="150" y="528" width="600" height="24" rx="12" fill="#151515"/>
+  <text x="92" y="622" font-family="Tahoma, Arial, sans-serif" font-size="34" font-weight="900" fill="#151515">Factory Year-end Stock Count</text>
+</svg>
