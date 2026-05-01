@@ -10,7 +10,7 @@ export const navItems = [
   { label: "เกี่ยวกับเรา", href: "/about" },
   { label: "บริการ", href: "/services" },
   { label: "โซลูชัน", href: "/projects" },
-  { label: "Reference", href: "/reference" },
+  { label: "ผลงานที่ผ่านมา", href: "/reference" },
   { label: "ติดต่อเรา", href: "/contact" },
 ];
 
