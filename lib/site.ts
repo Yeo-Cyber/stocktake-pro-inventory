@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "StockTake Pro",
-  url: "https://stocktake-pro.vercel.app",
+  url: "https://inventory-audit-website.vercel.app",
   description:
     "StockTake Pro ให้บริการตรวจนับสต๊อกสินค้า จำหน่ายซอฟต์แวร์ตรวจนับผ่าน Excel และอุปกรณ์สแกนบาร์โค้ดสำหรับ SME โรงงาน คลังสินค้า และ Hypermarket",
 };
