@@ -6,6 +6,7 @@ const cards = [
   { title: "เกี่ยวกับเรา", href: "/admin/about" },
   { title: "Services", href: "/admin/services" },
   { title: "Solution", href: "/admin/solution" },
+  { title: "Solution Details", href: "/admin/project-details" },
   { title: "Software", href: "/admin/software" },
   { title: "Hardware", href: "/admin/hardware" },
   { title: "Pricing", href: "/admin/pricing" },

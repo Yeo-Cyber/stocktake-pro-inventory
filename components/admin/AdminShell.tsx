@@ -6,6 +6,7 @@ const menu = [
   { label: "เกี่ยวกับเรา", href: "/admin/about" },
   { label: "Services", href: "/admin/services" },
   { label: "Solution", href: "/admin/solution" },
+  { label: "Solution Details", href: "/admin/project-details" },
   { label: "Software", href: "/admin/software" },
   { label: "Hardware", href: "/admin/hardware" },
   { label: "Pricing", href: "/admin/pricing" },

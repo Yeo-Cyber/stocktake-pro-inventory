@@ -7,6 +7,7 @@ import {
   getCustomerLogos,
   getHardwareProducts,
   getPricingPackages,
+  getProjectDetails,
   getReferenceCases,
   getServices,
   getSolutions,
@@ -27,6 +28,23 @@ const fields = {
     { name: "title", label: "ชื่อโซลูชัน" },
     { name: "description", label: "รายละเอียดโซลูชัน", type: "textarea" as const },
     { name: "image_url", label: "รูปโซลูชัน", type: "image" as const },
+    { name: "sort_order", label: "Sort Order", type: "number" as const },
+  ],
+  "project-details": [
+    { name: "slug", label: "Slug เช่น sme-online-seller" },
+    { name: "label", label: "กลุ่มลูกค้า / Industry" },
+    { name: "title", label: "หัวข้อหลัก" },
+    { name: "subtitle", label: "Subtitle", type: "textarea" as const },
+    { name: "heroImage", label: "Hero Image", type: "image" as const },
+    { name: "solutionImage", label: "Solution Image", type: "image" as const },
+    { name: "painPoints", label: "Pain Point (1 บรรทัดต่อ 1 ข้อ)", type: "textarea" as const },
+    { name: "solutions", label: "Solution (1 บรรทัดต่อ 1 ข้อ)", type: "textarea" as const },
+    { name: "scopeOfWork", label: "Scope of Work (1 บรรทัดต่อ 1 ข้อ)", type: "textarea" as const },
+    { name: "process", label: "Process ขั้นตอนการทำงาน (1 บรรทัดต่อ 1 ข้อ)", type: "textarea" as const },
+    { name: "deliverables", label: "Deliverables (1 บรรทัดต่อ 1 ข้อ)", type: "textarea" as const },
+    { name: "kpis", label: "KPI / Business Benefit (1 บรรทัดต่อ 1 ข้อ)", type: "textarea" as const },
+    { name: "recommended_package_title", label: "Recommended Package - Title" },
+    { name: "recommended_package_description", label: "Recommended Package - Description", type: "textarea" as const },
     { name: "sort_order", label: "Sort Order", type: "number" as const },
   ],
   software: [
@@ -84,7 +102,21 @@ function toRows(items: Array<Record<string, unknown>>) {
     data: Object.fromEntries(
       Object.entries(item)
         .filter(([key]) => !["id", "section", "sort_order"].includes(key))
-        .map(([key, value]) => [key, Array.isArray(value) ? value.join("\n") : value == null ? "" : String(value)]),
+        .flatMap(([key, value]) => {
+          if (key === "recommendedPackage" && value && typeof value === "object" && !Array.isArray(value)) {
+            const recommendedPackage = value as { title?: unknown; description?: unknown };
+
+            return [
+              ["recommended_package_title", recommendedPackage.title == null ? "" : String(recommendedPackage.title)],
+              [
+                "recommended_package_description",
+                recommendedPackage.description == null ? "" : String(recommendedPackage.description),
+              ],
+            ];
+          }
+
+          return [[key, Array.isArray(value) ? value.join("\n") : value == null ? "" : String(value)]];
+        }),
     ),
     sort_order: typeof item.sort_order === "number" ? item.sort_order : 100,
   }));
@@ -155,6 +187,7 @@ export default async function AdminSectionPage({ params }: { params: Promise<Par
   const loaders = {
     services: getServices,
     solution: getSolutions,
+    "project-details": getProjectDetails,
     software: getSoftwareProducts,
     hardware: getHardwareProducts,
     pricing: getPricingPackages,
@@ -162,11 +195,18 @@ export default async function AdminSectionPage({ params }: { params: Promise<Par
     "customer-logos": getCustomerLogos,
   };
   const items = await loaders[section as keyof typeof loaders]();
-  const collectionSection = section === "customer-logos" ? "customer_logos" : section;
+  const collectionSection =
+    section === "customer-logos" ? "customer_logos" : section === "project-details" ? "project_details" : section;
 
   return (
     <AdminEditor
-      title={section === "customer-logos" ? "Customer Logos" : section.charAt(0).toUpperCase() + section.slice(1)}
+      title={
+        section === "customer-logos"
+          ? "Customer Logos"
+          : section === "project-details"
+            ? "Solution Details"
+            : section.charAt(0).toUpperCase() + section.slice(1)
+      }
       mode="collection"
       section={collectionSection}
       fields={config}

@@ -13,6 +13,7 @@ import {
   defaultSolutions,
   defaultSoftware,
 } from "@/lib/defaults";
+import { projects as defaultProjectDetails, type ProjectDetail } from "@/lib/projects";
 
 type JsonObject = Record<string, unknown>;
 
@@ -32,6 +33,11 @@ export type CmsItem = {
   results?: string;
   details?: string;
   sort_order?: number;
+};
+
+type CmsProjectDetailData = Partial<ProjectDetail> & {
+  recommended_package_title?: string;
+  recommended_package_description?: string;
 };
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -106,6 +112,48 @@ async function getCollection(section: string, fallback: CmsItem[]): Promise<CmsI
   }));
 }
 
+function listFromCms(value: unknown) {
+  if (Array.isArray(value)) {
+    return value.map(String).map((item) => item.trim()).filter(Boolean);
+  }
+
+  return String(value ?? "")
+    .split(/\r?\n/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function normalizeProjectDetail(data: CmsProjectDetailData, fallback: ProjectDetail): ProjectDetail {
+  return {
+    ...fallback,
+    ...data,
+    slug: String(data.slug || fallback.slug),
+    label: String(data.label || fallback.label),
+    title: String(data.title || fallback.title),
+    subtitle: String(data.subtitle || fallback.subtitle),
+    heroImage: String(data.heroImage || fallback.heroImage || ""),
+    solutionImage: String(data.solutionImage || fallback.solutionImage || ""),
+    painPoints: listFromCms(data.painPoints ?? fallback.painPoints),
+    solutions: listFromCms(data.solutions ?? fallback.solutions),
+    scopeOfWork: listFromCms(data.scopeOfWork ?? fallback.scopeOfWork),
+    process: listFromCms(data.process ?? fallback.process),
+    deliverables: listFromCms(data.deliverables ?? fallback.deliverables),
+    kpis: listFromCms(data.kpis ?? fallback.kpis),
+    recommendedPackage: {
+      title: String(
+        data.recommended_package_title ||
+          data.recommendedPackage?.title ||
+          fallback.recommendedPackage.title,
+      ),
+      description: String(
+        data.recommended_package_description ||
+          data.recommendedPackage?.description ||
+          fallback.recommendedPackage.description,
+      ),
+    },
+  };
+}
+
 export async function getHomepage() {
   return getContentBlock("homepage", defaultHomepage);
 }
@@ -160,6 +208,24 @@ export async function getReferenceCases() {
 
 export async function getCustomerLogos() {
   return getCollection("customer_logos", defaultCustomerLogos);
+}
+
+export async function getProjectDetails() {
+  const rows = await supabaseRequest<
+    Array<{ id: string; data: CmsProjectDetailData; sort_order: number }>
+  >(
+    "/rest/v1/collection_items?section=eq.project_details&select=id,data,sort_order&order=sort_order.asc,created_at.asc",
+  );
+
+  if (!rows?.length) {
+    return defaultProjectDetails;
+  }
+
+  return rows.map((row, index) => ({
+    ...normalizeProjectDetail(row.data, defaultProjectDetails[index] ?? defaultProjectDetails[0]),
+    id: row.id,
+    sort_order: row.sort_order,
+  }));
 }
 
 export { defaultMetrics };

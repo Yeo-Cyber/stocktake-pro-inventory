@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Card } from "@/components/Card";
 import { SectionHeader } from "@/components/SectionHeader";
-import { getSolutions } from "@/lib/cms";
-import { projectDetails } from "@/lib/project-details";
+import { getProjectDetails, getSolutions } from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ProjectsPage() {
-  const solutions = await getSolutions();
+  const [solutions, projectDetails] = await Promise.all([getSolutions(), getProjectDetails()]);
 
   return (
     <main>
@@ -39,6 +38,7 @@ export default async function ProjectsPage() {
                     title={solution.title}
                     description={solution.description}
                     label={solution.label}
+                    imageUrl={solution.image_url}
                   />
                   <p className="mt-3 text-sm font-black text-neutral-950">
                     ดูรายละเอียดโซลูชัน
